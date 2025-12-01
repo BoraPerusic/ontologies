@@ -1,0 +1,36 @@
+Table: {
+  name: "orders"
+  columns: [
+    { name: "id" type: int },
+    { name: "customer_id" type: int },
+    { name: "status" type: string },
+    { name: "date" type: date },
+    { name: "total" type: int }
+  ]
+  indices: [
+    { name: "pk_orders" type: primary columns: [ "id" ] }
+  ]
+}
+Table: {
+  name: "customers"
+  columns: [
+    { name: "id" type: int },
+    { name: "name" type: string }
+  ]
+  indices: [
+    { name: "pk_orders" type: primary columns: [ "id" ] }
+  ]
+}
+Relation: {
+  type: "tables",
+  kind: "*",
+  name: "has_order"
+  from: {
+    table: "customers",
+    column: [ "id" ]
+  }
+  to: {
+    table: "orders",
+    column: [ "customer_id" ]
+  }
+}

@@ -1,0 +1,22 @@
+DomainMapping: {
+  name: "product.name"
+  type: "string"
+  source: "jdbc::erp::erp::public::products::product_name"
+}
+DomainMapping: {
+  name: "vendor.name"
+  type: "string"
+  source: "list::onto/data/vendors.txt"
+}
+TaxonomyMapping: {
+  name: "brand"
+  source = "jdbc::erp::erp::public::brands::brand, parent"
+  columnMapping: {
+    child: "brand"
+    parent: "parent"
+  }
+}
+TaxonomyMapping {
+  name = "category"
+  source = "jdbc::erp::erp::public::product_categories::category, subcategory, subsubcategory"
+}

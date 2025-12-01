@@ -1,0 +1,109 @@
+Property:  {
+  name: "ICO",
+  type: "string",
+  // validations are set of functions calls.
+  validations: [
+    numeric(),
+    len(8)
+  ],
+  constant: true
+}
+Property:  {
+  name: "DIC",
+  type: "string",
+  validations: [
+    regex("CZ[0..9]*8")
+  ]
+}
+Property:  {
+  name: "name",
+  type: "string",
+  traits: [
+    "name"
+  ]
+}
+Property:  {
+  name: "currency",
+  type: "string",
+  enum: true,
+  valueSource: "erp:currencies:curr_code"
+}
+Property:  {
+  name: "price",
+  type: "object",
+  structure: {
+    properties: [
+      "value::number", "currency::currency"
+    ],
+    traits: [ "temporary" ]
+  },
+  traits: [
+    "price"
+  ]
+}
+Property:  {
+  name: "state",
+  type: "object",
+  structure: {
+    properties: ["id:id"]
+    traits: ["temporary"]
+  }
+  traits = ["stateful"]
+}
+Property:  {
+  name: "valid",
+  type: "duration",
+  traits: ["temporary"]
+}
+Property:  {
+  name: "unit",
+  type: "object",
+  structure: {
+    properties: [
+      {
+        name: "measure",
+        // or this can be taxonomy
+        type: "string",
+        values: ["mass", "volume", "length", "area", "temperature", "force"]
+      },
+      {
+        name: "unit",
+        type: "string"
+      }
+      // todo conversions ...
+    ]
+  }
+}
+Trait: {
+  name: "quantity"
+  properties: [
+    {
+      name: "value",
+      type: "number",
+      validations: [
+        gt(0)
+      ]
+    },
+    {
+      name: "unit",
+      // type: unit TODO this needs to be implemented
+      type: "object"
+    }
+  ]
+}
+Taxonomy: {
+  name = "brand",
+  leveled = false
+  // 'names' are empty when leveled is false
+}
+Taxonomy: {
+  name = "category",
+  // if 'levels' is present, the 'leveled' is implied to be true
+  levels = 3,
+  names = ["category", "subcategory", "subsubcategory"]
+}
+Taxonomy: {
+  name = "eshopCategory"
+  levels = 4
+  names = ["product", "category", "group", "line"]
+}

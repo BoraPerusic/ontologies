@@ -1,0 +1,92 @@
+Concept: {
+  name : "organization",
+  kind : "kind",
+  traits : ["name", "address", "temporary", "stateful"]
+  properties : [
+    "ICO", "DIC",
+  ],
+  identification : "ICO"
+}
+
+Concept: {
+  name : "customer",
+  kind : "role",
+  roleOf : [ "organization", "organization" ]
+//  traits : "[id]  //id and temporary is derived from the fact it is a role
+  relation : "buys"
+  // labels to edges are defined elsewhere
+  // can be represented as vertex", or an edge
+  // this is 'upsert' - does not have to be created separately (but can)
+}
+
+Concept: {
+  name : "vendor",
+  kind : "role",
+  roleOf : ["organization", "organization"]
+  relation : "sells"
+}
+
+Concept: {
+  name : "goods",
+  kind : "quantity"  // we do not keep ids of individual SKUs
+  traits : ["name", "quantity", "price" ],
+  taxonomies : ["brand", "category", "eshopCategory"]
+}
+
+Concept: {
+  name : "order",
+  kind : "event"
+  // and that's it", event defines the properties
+}
+
+Concept: {
+  name : "producer",
+  kind : "role",
+  roleOf : [ "organization", "goods"]
+  relation : "produces"
+}
+
+Concept: {
+  name : "orgUnit",
+  kind : "kind",
+  traits : [ "name", "address", "temporary", "stateful" ],
+  properties : [
+    {
+      name : "type",
+      type : "string",
+      // specifying values means it is enum: true
+      values : [ "financial", "hq", "delivery" ]
+    }
+  ]
+}
+
+// relations
+Relation: {
+  type: "conceptual"
+  name : "hasParent",
+  from : "orgUnit",
+  to : {
+    or : ["orgUnit", "organization" ]
+  },
+  kind : "*",
+  reverse : "hasChild"
+}
+
+Relation: {
+  type: "conceptual",
+  name : "sells_goods",
+  from : {
+    and : ["organization", "goods"]
+  },
+  to : "organization"
+}
+
+Relations: {
+  relations: [
+    "order" -1-> "has_seller" -> "organization",
+    "order" -1-> "has_buyer" -> "organization",
+    "order" -0-> "has_delivery" -> "orgUnit",
+    "order" -+-> "has_goods" -> "goods",
+    "organization" -*-> "has_unit" -> "orgUnit"
+  ]
+}

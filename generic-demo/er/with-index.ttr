@@ -1,0 +1,10 @@
+Table: {
+  name: "orders"
+  columns: [
+    { name: "id" type: int },
+    { name: "total" type: int }
+  ]
+  indices: [
+    { name: "pk_orders" type: primary columns: [ "id" ] }
+  ]
+}

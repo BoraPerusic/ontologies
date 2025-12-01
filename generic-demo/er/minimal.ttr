@@ -1,0 +1,9 @@
+Table: {
+  name: "users"
+  columns: [
+    { name: "id" type: int }
+  ]
+  indices: [
+    { name: "pk" type: primary columns: [ "id" ] }
+  ]
+}
