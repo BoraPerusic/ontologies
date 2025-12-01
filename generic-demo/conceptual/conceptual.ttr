@@ -50,14 +50,7 @@ Concept: {
   name : "orgUnit",
   kind : "kind",
   traits : [ "name", "address", "temporary", "stateful" ],
-  properties : [
-    {
-      name : "type",
-      type : "string",
-      // specifying values means it is enum: true
-      values : [ "financial", "hq", "delivery" ]
-    }
-  ]
+  properties : [ "orgUnit.type" ]
 }
 
 // relations

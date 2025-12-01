@@ -8,6 +8,14 @@ Property:  {
   ],
   constant: true
 }
+Property: {
+    {
+      name : "orgUnit.type",
+      type : "string",
+      // specifying values means it is enum: true
+      values : [ "financial", "hq", "delivery" ]
+    }
+}
 Property:  {
   name: "DIC",
   type: "string",
@@ -45,7 +53,7 @@ Property:  {
   name: "state",
   type: "object",
   structure: {
-    properties: ["id:id"]
+    properties: ["id::id"]
     traits: ["temporary"]
   }
   traits = ["stateful"]
@@ -59,21 +67,20 @@ Property:  {
   name: "unit",
   type: "object",
   structure: {
-    properties: [
-      {
-        name: "measure",
-        // or this can be taxonomy
-        type: "string",
-        values: ["mass", "volume", "length", "area", "temperature", "force"]
-      },
-      {
-        name: "unit",
-        type: "string"
-      }
-      // todo conversions ...
-    ]
+    properties: [ "measure::measure", "unit::unit" // todo conversions ... ]
   }
 }
+Property:{
+  name: "measure",
+  // or this can be taxonomy
+  type: "string",
+  values: ["mass", "volume", "length", "area", "temperature", "force"]
+}
+Property:{
+  name: "unit",
+  type: "string"
+}
+
 Trait: {
   name: "quantity"
   properties: [
