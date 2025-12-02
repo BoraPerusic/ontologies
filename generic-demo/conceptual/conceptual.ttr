@@ -74,12 +74,10 @@ Relation: {
   to : "organization"
 }
 
-Relations: {
-  relations: [
+Relations: [
     "order" -1-> "has_seller" -> "organization",
     "order" -1-> "has_buyer" -> "organization",
     "order" -0-> "has_delivery" -> "orgUnit",
     "order" -+-> "has_goods" -> "goods",
     "organization" -*-> "has_unit" -> "orgUnit"
-  ]
-}
+]
