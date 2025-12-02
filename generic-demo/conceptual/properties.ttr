@@ -9,12 +9,10 @@ Property:  {
   constant: true
 }
 Property: {
-    {
       name : "orgUnit.type",
       type : "string",
       // specifying values means it is enum: true
       values : [ "financial", "hq", "delivery" ]
-    }
 }
 Property:  {
   name: "DIC",
@@ -67,7 +65,7 @@ Property:  {
   name: "unit",
   type: "object",
   structure: {
-    properties: [ "measure::measure", "unit::unit" // todo conversions ... ]
+    properties: [ "measure::measure", "unit::unit" ] // todo conversions ...
   }
 }
 Property:{
